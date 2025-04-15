@@ -7,10 +7,23 @@ This write-up documents a practical monitoring project using VirtualBox to simul
 2. [Monitoring Server VM Setup]()
 3. [Client VM Setup]()
 4. [Adding Hosts and Setting Up Alerts]()
-5. [Monitoring and Visualisation]()
+5. [Testing Monitoring and Visualisation]()
 
 
 ## antiX Linux VM Setup in VirtualBox
 
 
-## 
+
+## Monitoring Server VM Setup
+
+
+
+## Client VM Setup
+
+
+
+## Adding Hosts and Setting Up Alerts
+
+
+
+## Testing Monitoring and Visualisation
