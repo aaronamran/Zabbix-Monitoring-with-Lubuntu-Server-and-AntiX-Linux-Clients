@@ -11,6 +11,12 @@ This write-up documents a practical monitoring project using VirtualBox to simul
 
 
 ## antiX Linux VM Setup in VirtualBox
+antiX Linux has two possible init systems, which are the sysVinit (default option) or runit. For this homelab project, sysVinit which is the default option is used. Aditionally, each of these architectures and init system comes in four possible "flavours", which are:
+- antiX-full (c1.8GB) - 4 windows managers – IceWM (default), fluxbox, jwm and herbstluftwm plus full libreoffice suite. Suitable for most users. Lots of applications pre-installed and has the best hardware support.
+- antiX-base (c1.2GB) – 4 windows managers – IceWM (default), fluxbox, jwm and herbstluftwm. Suitable for those who want to customise what to install.
+- antiX-core (c520MB) – no gui environment, but should support most wireless. Suitable for confident/comfortable users who want to build up from a minimal install.
+- antiX-net (c220MB)- no X. Just enough to get you connected (wired) and ready to build. (NOTE – to connect to the Internet, you might need to type as root user ifup eth0 or ifup eth1). Suitable for Advanced users.
+
 
 
 
