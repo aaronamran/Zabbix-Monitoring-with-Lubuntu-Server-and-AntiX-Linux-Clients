@@ -112,6 +112,8 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo systemctl enable zabbix-server zabbix-agent apache2
   ```
 - To access the web UI, open a web browser like Firefox and enter `http://<Lubuntu_IP_address>/zabbix`
+  ![image](https://github.com/user-attachments/assets/3936bb27-32e6-42fa-a772-7c7adb6e3e4d)
+
 
 
 ## Client VM Setup and Agent Testing
