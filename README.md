@@ -195,10 +195,11 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 
 ## Adding Hosts and Setting Up Alerts
-![image](https://github.com/user-attachments/assets/1df37878-4982-4471-945a-c987b2cbe5bb)
+- Ensure that the previous config files such as `/etc/zabbix/zabbix_server.conf` are modified correctly
 
 - Log into Zabbix Web UI on Lubuntu Server VM. The default username is Admin and password is zabbix
-  ![image](https://github.com/user-attachments/assets/663004e9-b845-48a9-8d10-31213b5c0dc8)
+  ![image](https://github.com/user-attachments/assets/c4728e8d-bebd-4d30-a0f3-250b9beafbac)
+
 - Before setting up triggers and dashboards, test whether the Zabbix Server can successfully communicate with the client. From the Zabbix Server, run
   ```
   zabbix_get -s <Client_IP> -k system.uptime
