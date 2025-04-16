@@ -77,6 +77,8 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo mysql_secure_installation
   sudo mysql -uroot -p
   ```
+  ![image](https://github.com/user-attachments/assets/cc677b2f-7285-4031-8fd0-a67d3b275a70)
+
 - In the MySQL prompt, run
   ```  
   CREATE DATABASE zabbix CHARACTER SET utf8 COLLATE utf8_bin;
@@ -85,10 +87,15 @@ For this homelab project, sysVinit which is the default option is used. The spec
   FLUSH PRIVILEGES;
   EXIT;
   ```
+  ![image](https://github.com/user-attachments/assets/d9a184b8-ab3a-4813-8ebf-3117b6e45850)
+
 - Import the DB Schema
   ```
   zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql -uzabbix -p zabbix
   ```
+  ![image](https://github.com/user-attachments/assets/fbfa228a-0534-4baa-853e-ace4fe7a1e03)
+  <br />
+  Note that if `zabbixpass` is not used as the password, it will return ERROR 1045 (28000) as shown in the screenshot
 - Edit the Zabbix config
   ```
   sudo nano /etc/zabbix/zabbix_server.conf
@@ -97,6 +104,8 @@ For this homelab project, sysVinit which is the default option is used. The spec
   ```
   DBPassword=zabbixpass
   ```
+  ![image](https://github.com/user-attachments/assets/deb2375d-e81c-43a7-be88-6703cbdd4c2d)
+
 - Start the services
   ```
   sudo systemctl restart zabbix-server zabbix-agent apache2
