@@ -188,12 +188,6 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo /etc/init.d/zabbix-agent status
   ```
   ![image](https://github.com/user-attachments/assets/76bff0b1-573a-4fd8-9a94-33190f7da16e)
-
-- Before setting up triggers and dashboards, test whether the Zabbix Server can successfully communicate with the client. From the Zabbix Server, run
-  ```
-  zabbix_get -s <Client_IP> -k system.uptime
-  ```
-  We should get a number that represents the system uptime in seconds. If a response is not received, check your network connectivity, firewall settings, and the `zabbix_agentd.conf` settings.
 - Clone the current client VM so that the configurations are the standardised
 
 
@@ -201,9 +195,15 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 
 ## Adding Hosts and Setting Up Alerts
+![image](https://github.com/user-attachments/assets/1df37878-4982-4471-945a-c987b2cbe5bb)
+
 - Log into Zabbix Web UI on Lubuntu Server VM. The default username is Admin and password is zabbix
   ![image](https://github.com/user-attachments/assets/663004e9-b845-48a9-8d10-31213b5c0dc8)
-
+- Before setting up triggers and dashboards, test whether the Zabbix Server can successfully communicate with the client. From the Zabbix Server, run
+  ```
+  zabbix_get -s <Client_IP> -k system.uptime
+  ```
+  We should get a number that represents the system uptime in seconds. If a response is not received, check your network connectivity, firewall settings, and the `zabbix_agentd.conf` settings
 - Go to `Configuration > Hosts > Create Host` and set the following:
   - Hostname: Match /etc/hostname of client VM
   - IP: Client VM’s IP address
