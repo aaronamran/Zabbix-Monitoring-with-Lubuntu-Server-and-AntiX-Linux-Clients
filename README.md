@@ -4,10 +4,10 @@ This write-up documents a practical monitoring project using VirtualBox to simul
 
 
 1. [antiX Linux VM Setup in VirtualBox](#antix-linux-vm-setup-in-virtualbox)
-2. [Monitoring Server VM Setup](https://github.com/aaronamran/Zabbix-Monitoring-with-Lubuntu-Server-and-AntiX-Linux-Clients/blob/main/README.md#monitoring-server-vm-setup)
-3. [Client VM Setup](https://github.com/aaronamran/Zabbix-Monitoring-with-Lubuntu-Server-and-AntiX-Linux-Clients/blob/main/README.md#client-vm-setup)
-4. [Adding Hosts and Setting Up Alerts](https://github.com/aaronamran/Zabbix-Monitoring-with-Lubuntu-Server-and-AntiX-Linux-Clients/blob/main/README.md#adding-hosts-and-setting-up-alerts)
-5. [Testing Monitoring and Visualisation](https://github.com/aaronamran/Zabbix-Monitoring-with-Lubuntu-Server-and-AntiX-Linux-Clients/blob/main/README.md#testing-monitoring-and-visualisation)
+2. [Monitoring Server VM Setup](#monitoring-server-vm-setup)
+3. [Client VM Setup](#client-vm-setup)
+4. [Adding Hosts and Setting Up Alerts](#adding-hosts-and-setting-up-alerts)
+5. [Testing Monitoring and Visualisation](#testing-monitoring-and-visualisation)
 
 
 ## antiX Linux VM Setup in VirtualBox
