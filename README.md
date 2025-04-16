@@ -168,6 +168,8 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 ## Adding Hosts and Setting Up Alerts
 - Log into Zabbix Web UI on Lubuntu Server VM. The default username is Admin and password is zabbix
+  ![image](https://github.com/user-attachments/assets/663004e9-b845-48a9-8d10-31213b5c0dc8)
+
 - Go to `Configuration > Hosts > Create Host` and set the following:
   - Hostname: Match /etc/hostname of client VM
   - IP: Client VM’s IP address
