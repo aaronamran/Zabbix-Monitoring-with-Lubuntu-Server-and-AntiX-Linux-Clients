@@ -111,8 +111,35 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo systemctl restart zabbix-server zabbix-agent apache2
   sudo systemctl enable zabbix-server zabbix-agent apache2
   ```
-- To access the web UI, open a web browser like Firefox and enter `http://<Lubuntu_IP_address>/zabbix`
+- To access the web UI, open a web browser like Firefox and enter `http://<Lubuntu_IP_address>/zabbix`. On first time installation, it will redirect us to `http://<Lubuntu_IP_address>/zabbix/setup.php`. Choose the default language and click Next step<br />
   ![image](https://github.com/user-attachments/assets/3936bb27-32e6-42fa-a772-7c7adb6e3e4d)
+  <br />
+  For the Check of pre-requisites page, ensure that all items listed are OK
+  <br />
+  ![image](https://github.com/user-attachments/assets/afc8f33c-baa5-4599-ab0d-741cee2aa508)
+  <br />
+  In the Configure DB connection, key in the password `zabbixpass` that we created and used in the earlier steps
+  <br />
+  ![image](https://github.com/user-attachments/assets/007e3716-9288-44b1-b1ef-820a3504a64e)
+  <br />
+  Next in the Settings page, give a name to the server and choose the correct time zone
+  <br />
+  ![image](https://github.com/user-attachments/assets/c02fd5c4-5a70-49a0-8d63-2c5dd0a4e95a)
+  <br />
+  A Pre-installation summary page will appear next before proceeding with the installation
+  <br />
+  ![image](https://github.com/user-attachments/assets/e78211fd-b8cc-4d1f-87c5-cae991e62921)
+  <br />
+  The following message will appear upon successful configuration and installation
+  <br />
+  ![image](https://github.com/user-attachments/assets/c5751cdd-2b6c-4ae0-b867-793f81121306)
+
+
+
+
+  
+
+  
 
 
 
