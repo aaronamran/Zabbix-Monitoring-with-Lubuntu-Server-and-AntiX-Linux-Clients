@@ -183,9 +183,14 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo service restart zabbix-agent
   sudo service enable zabbix-agent
   ```
+  If the command does not work or is not recognised, use the format of the next commands. <br />
   To check if the service is running, use
   ```
   sudo /etc/init.d/zabbix-agent status
+  ```
+  Likewise, to restart the service, use
+  ```
+  sudo /etc/init.d/zabbix-agent restart
   ```
   ![image](https://github.com/user-attachments/assets/76bff0b1-573a-4fd8-9a94-33190f7da16e)
 - Clone the current client VM so that the configurations are the standardised
@@ -204,7 +209,9 @@ For this homelab project, sysVinit which is the default option is used. The spec
   ```
   zabbix_get -s <Client_IP> -k system.uptime
   ```
-  We should get a number that represents the system uptime in seconds. If a response is not received, check your network connectivity, firewall settings, and the `zabbix_agentd.conf` settings
+  ![image](https://github.com/user-attachments/assets/2260c57c-9c33-4a12-a7c0-fcecf054126d)
+
+  We should get a number that represents the system uptime in seconds. If a response is not received, check your network connectivity, firewall settings, and the `zabbix_agentd.conf` settings. In the screenshot, it shows that there was access restriction in Zabbix agent configuration. This is due to ServerActive not being set solely to be the Lubuntu Server VM's IP address
 - Go to `Configuration > Hosts > Create Host` and set the following:
   - Hostname: Match /etc/hostname of client VM
   - IP: Client VM’s IP address
