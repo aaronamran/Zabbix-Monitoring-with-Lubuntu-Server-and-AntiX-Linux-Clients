@@ -269,7 +269,7 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo apt install stress
   stress --cpu 2 --timeout 60
   ```
-  A temporary CPU spike should be visible in the Zabbix dashboard
+  A temporary CPU spike should be visible in the Zabbix dashboard. In our homelab project tests, two stress tests were performed, resulting in two spikes in the CPU usage graph
   <br />
   ![image](https://github.com/user-attachments/assets/f5926e45-10c3-4346-808e-e5a6671aacd1)
 
