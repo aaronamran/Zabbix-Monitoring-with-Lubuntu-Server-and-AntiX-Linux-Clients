@@ -50,9 +50,11 @@ For this homelab project, sysVinit which is the default option is used. The spec
   ```
   Ubuntu 24.04 uses `libldap-2.6-0`, but Zabbix 6.0 depends on `2.5`. So the `.deb` file from Jammy (22.04) is grabbed and installed side-by-side
   ```
-  wget http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/libldap-2.5-0_2.5.17+dfsg-0ubuntu0.22.04.1_amd64.deb
-  sudo dpkg -i libldap-2.5-0_2.5.17+dfsg-0ubuntu0.22.04.1_amd64.deb
+  wget http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/libldap-2.5-0_2.5.18+dfsg-0ubuntu0.22.04.3_amd64.deb
+  sudo dpkg -i libldap-2.5-0_2.5.18+dfsg-0ubuntu0.22.04.3_amd64.deb
   ```
+  ![image](https://github.com/user-attachments/assets/3ffd19ce-84a7-4d4c-bfbf-e1e4409fa0bb)
+  <br />
   Continue installing the Zabbix server, frontend, agent and MariaDB
   ```
   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent mariadb-server -y
@@ -67,6 +69,8 @@ For this homelab project, sysVinit which is the default option is used. The spec
   zabbix_server -V
   zabbix_agentd -V
   ```
+  ![image](https://github.com/user-attachments/assets/c4042c34-928f-47fa-accf-115b01c00c20)
+
 
 - To configure MySQL (MariaDB), secure MySQL and create the Zabbix Database
   ```
