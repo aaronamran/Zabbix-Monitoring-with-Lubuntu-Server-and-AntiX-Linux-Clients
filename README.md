@@ -136,13 +136,6 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 
 
-
-  
-
-  
-
-
-
 ## Client VM Setup and Agent Testing
 - Since antiX-core Linux VM has been installed earlier, install Zabbix Agent
   ```
@@ -174,7 +167,7 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 
 ## Adding Hosts and Setting Up Alerts
-- Log into Zabbix Web UI on Lubuntu Server VM
+- Log into Zabbix Web UI on Lubuntu Server VM. The default username is Admin and password is zabbix
 - Go to `Configuration > Hosts > Create Host` and set the following:
   - Hostname: Match /etc/hostname of client VM
   - IP: Client VM’s IP address
