@@ -137,6 +137,32 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 
 ## Client VM Setup and Agent Testing
+- After starting antiX-core Linux VM for the first time, login as root with the password root. Then run the following command to install antiX-core on the virtual hard drive
+  ```
+  cli-installer
+  ```
+  The following prompt will appear, enter y for yes
+  <br />
+  ![image](https://github.com/user-attachments/assets/3eb8f640-e1f2-413f-ba0b-5e867d62f60b)
+
+- A label type has to be selected. `gpt` which stands for GUID partition table is recommended for modern systems especially if a UEFI VM setup is used and the disk is larger than 2TB. Based on this homelab project, `dos` will be used due to our VM settings for smaller disks
+  ![image](https://github.com/user-attachments/assets/6c7c5ada-7708-4f64-ae8c-3d89ba19804c)
+  <br />
+  Then press Enter to create a new partition from free space and proceed with partition size of 2GB
+  <br />
+  ![image](https://github.com/user-attachments/assets/6e881446-a770-4d31-9e22-685cea621ce6)
+  <br />
+  `sda` is used as the root partition. If you are unsure what the partition is named, quit the installer and run the command `lsblk`, then restart the entire process until this installation step is reached
+  <br />
+  ![image](https://github.com/user-attachments/assets/d7d294a0-fbcf-40db-b9f9-fe98dc95bbab)
+- In terms of choosing a filesystem, the most compatible choice for this project is `ext4`. After choosing `ext4`, the installer will format `/dev/sda` with ext4 and install antiX-core. Then reboot the VM
+  ![image](https://github.com/user-attachments/assets/8a338e40-3b4e-461e-b6ad-ad0b21a48408)
+
+
+
+
+
+
 - Since antiX-core Linux VM has been installed earlier, install Zabbix Agent
   ```
   sudo apt update
