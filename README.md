@@ -37,6 +37,37 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo apt update
   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent mariadb-server -y
   ```
+  ![image](https://github.com/user-attachments/assets/b64b7202-0301-4c5d-ae49-adabaa06a2a0)
+  <br />
+  However, as seen in the screenshot below, an error with unmet dependencies for Zabbix was encountered. The version of Lubuntu VM at this point in time is Ubuntu 24.04 (Noble Numbat) which is very new, and Zabbix has not released official packages for it yet <br />
+  ![image](https://github.com/user-attachments/assets/f51eb3b0-712d-4ee8-9a1f-ec6045e38ba1)
+  <br />
+  A workaround for this error is to run each of the command below to download the Zabbix 6.0 repo for Ubuntu 22.04 (Jammy)
+  ```
+  wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4+ubuntu22.04_all.deb
+  sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
+  sudo apt update
+  ```
+  Ubuntu 24.04 uses `libldap-2.6-0`, but Zabbix 6.0 depends on `2.5`. So the `.deb` file from Jammy (22.04) is grabbed and installed side-by-side
+  ```
+  wget http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/libldap-2.5-0_2.5.17+dfsg-0ubuntu0.22.04.1_amd64.deb
+  sudo dpkg -i libldap-2.5-0_2.5.17+dfsg-0ubuntu0.22.04.1_amd64.deb
+  ```
+  Continue installing the Zabbix server, frontend, agent and MariaDB
+  ```
+  sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent mariadb-server -y
+  ```
+  In case dependency issues still occur, use
+  ```
+  sudo apt --fix-broken install
+  ```
+  
+- Verify server and agent after installation
+  ```
+  zabbix_server -V
+  zabbix_agentd -V
+  ```
+
 - To configure MySQL (MariaDB), secure MySQL and create the Zabbix Database
   ```
   sudo mysql_secure_installation
