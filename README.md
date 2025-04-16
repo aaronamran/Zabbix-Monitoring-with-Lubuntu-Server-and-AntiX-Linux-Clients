@@ -220,21 +220,32 @@ For this homelab project, sysVinit which is the default option is used. The spec
   - IP: Client VM’s IP address
   - Group: Linux Servers
   - Template: Template OS Linux
-- To set up alerts for high CPU usage, go to `Configuration > Actions` and create a new action:
+  ![image](https://github.com/user-attachments/assets/56d5e798-f46c-4328-8173-f1d9a4c07dd0)
+
+- To set up alerts for high CPU usage, go to `Configuration > Actions > Trigger actions` and create a new action:
   - Name: High CPU usage alert
   - Condition: Trigger name = "Processor load is too high on {HOST.NAME}"
-  - Operation: Send message to admin
-- To create an alert for low disk space, navigate to `Configuration > Hosts > [Select your host] > Items` and create an item with the following parameters then save it:
+  - Operation: Send message to a
+  ![image](https://github.com/user-attachments/assets/e80d9b42-9eef-472f-bdc4-66a501b99698)
+
+- To create an alert for low disk space, navigate to `Configuration > Hosts > [Select your host] > Items`
+  ![image](https://github.com/user-attachments/assets/dbaed33c-3a53-45c2-b1d2-955928021ef6)
+
+- Create an item with the following parameters then save it:
   - Name: Free disk space on /
   - Type: Zabbix agent
   - Key: vfs.fs.size[/,free]
   - Type of information: Numeric (unsigned)
   - Units: B (bytes)
   - Update interval: 60s
+  ![image](https://github.com/user-attachments/assets/3e4fdade-8f9c-454f-a65e-ec97f8323538)
+
 - After creating a trigger for low disk space, switch to the Triggers tab and add:
   - Name: Low disk space on /
   - Expression: {<YourHost>:vfs.fs.size[/,free].last()}<500000000
   - Severity: Warning
+  ![image](https://github.com/user-attachments/assets/d6e9ff25-fe1d-4c3f-828c-f1a6c277b3c7)
+
 - To create alerts for unreachable hosts, first verify the host availability by navigating to `Configuration > Hosts` and ensuring the host's availability is enabled (look for green or gray dot next to Agent/ICMP)
 - Zabbix will automatically trigger and alert if the agent stops responding. If needed, the detection interval can be adjusted via `Administration > General > Housekeeping > Availability`
 
@@ -242,11 +253,24 @@ For this homelab project, sysVinit which is the default option is used. The spec
 
 ## Testing Monitoring and Visualisation
 - To view graphs in the Zabbix web UI, go to `Monitoring > Hosts > [Your Host] > Graphs`
-- Create dashboards in `Monitoring > Dashboard > Create`
-- To stress test a monitored client VM, run the following command in antiX-core Linux VM
+  ![image](https://github.com/user-attachments/assets/10a0a7a7-abcd-49c6-82de-bd2de9a3a331)
+
+- Create dashboards in `Monitoring > Dashboard > Create`. New dashboards are created by adding widgets
+  ![image](https://github.com/user-attachments/assets/df6a1574-9a03-4238-9a31-f97bac462608)
+
+- The global view dashboard looks like the following
+  ![image](https://github.com/user-attachments/assets/01252637-5dd7-4ad2-a2e1-0294cbef3ade)
+ 
+- To create a specific dashboard for stress testing CPUs, add a graph as widget, give it a title, choose `antix1` as data set, and `CPU utilisation` as item. Then reposition the widget to a suitable place on screen and save the changes
+  ![image](https://github.com/user-attachments/assets/881fcf73-54e8-42bf-861c-0f58fcbd8d26)
+
+- To stress test the client VM, run the following command in antiX-core Linux VM
   ```
   sudo apt install stress
   stress --cpu 2 --timeout 60
   ```
   A temporary CPU spike should be visible in the Zabbix dashboard
+  <br />
+  ![image](https://github.com/user-attachments/assets/f5926e45-10c3-4346-808e-e5a6671aacd1)
+
 
