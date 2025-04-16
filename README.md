@@ -5,7 +5,7 @@ This write-up documents a practical monitoring project using VirtualBox to simul
 
 1. [antiX Linux VM Setup in VirtualBox](#antix-linux-vm-setup-in-virtualbox)
 2. [Monitoring Server VM Setup](#monitoring-server-vm-setup)
-3. [Client VM Setup](#client-vm-setup)
+3. [Client VM Setup and Agent Testing](#client-vm-setup-and-agent-testing)
 4. [Adding Hosts and Setting Up Alerts](#adding-hosts-and-setting-up-alerts)
 5. [Testing Monitoring and Visualisation](#testing-monitoring-and-visualisation)
 
@@ -37,10 +37,13 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo apt update
   sudo apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent mariadb-server -y
   ```
-- Then configure MySQL (MariaDB)
+- To configure MySQL (MariaDB), secure MySQL and create the Zabbix Database
   ```
   sudo mysql_secure_installation
   sudo mysql -uroot -p
+  ```
+- In the MySQL prompt, run
+  ```  
   CREATE DATABASE zabbix CHARACTER SET utf8 COLLATE utf8_bin;
   CREATE USER zabbix@localhost IDENTIFIED BY 'zabbixpass';
   GRANT ALL PRIVILEGES ON zabbix.* TO zabbix@localhost;
@@ -54,7 +57,9 @@ For this homelab project, sysVinit which is the default option is used. The spec
 - Edit the Zabbix config
   ```
   sudo nano /etc/zabbix/zabbix_server.conf
-  # Set:
+  ```
+  and set
+  ```
   DBPassword=zabbixpass
   ```
 - Start the services
@@ -65,7 +70,7 @@ For this homelab project, sysVinit which is the default option is used. The spec
 - To access the web UI, open a web browser like Firefox and enter `http://<Lubuntu_IP_address>/zabbix`
 
 
-## Client VM Setup
+## Client VM Setup and Agent Testing
 - Since antiX-core Linux VM has been installed earlier, install Zabbix Agent
   ```
   sudo apt update
@@ -74,7 +79,9 @@ For this homelab project, sysVinit which is the default option is used. The spec
 - Then configure Zabbix Agent
   ```
   sudo nano /etc/zabbix/zabbix_agentd.conf
-  # Set:
+  ```
+  And set the following line to point to your Zabbix server
+  ```
   Server=<IP of Lubuntu VM>
   ```
 - Start the Agent service
@@ -82,30 +89,51 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo systemctl restart zabbix-agent
   sudo systemctl enable zabbix-agent
   ```
-- Clone the current client VM so that the configurations are the same
+- Before setting up triggers and dashboards, test whether the Zabbix Server can successfully communicate with the client. From the Zabbix Server, run
+  ```
+  zabbix_get -s <Client_IP> -k system.uptime
+  ```
+  We should get a number that represents the system uptime in seconds. If a response is not received, check your network connectivity, firewall settings, and the `zabbix_agentd.conf` settings.
+- Clone the current client VM so that the configurations are the standardised
+
+
+
 
 
 ## Adding Hosts and Setting Up Alerts
-- Log into Zabbix Web Interface in Lubuntu Server VM
-- Go to Configuration > Hosts > Create Host and set the following:
-  - Hostname: Match /etc/hostname of VM
-  - IP: VM’s IP address
+- Log into Zabbix Web UI on Lubuntu Server VM
+- Go to `Configuration > Hosts > Create Host` and set the following:
+  - Hostname: Match /etc/hostname of client VM
+  - IP: Client VM’s IP address
   - Group: Linux Servers
   - Template: Template OS Linux
-- To set up alerts, go to Configuration > Actions and create a new action:
+- To set up alerts for high CPU usage, go to `Configuration > Actions` and create a new action:
   - Name: High CPU usage alert
   - Condition: Trigger name = "Processor load is too high on {HOST.NAME}"
   - Operation: Send message to admin
- 
+- To create an alert for low disk space, navigate to `Configuration > Hosts > [Select your host] > Items` and create an item with the following parameters then save it:
+  - Name: Free disk space on /
+  - Type: Zabbix agent
+  - Key: vfs.fs.size[/,free]
+  - Type of information: Numeric (unsigned)
+  - Units: B (bytes)
+  - Update interval: 60s
+- After creating a trigger for low disk space, switch to the Triggers tab and add:
+  - Name: Low disk space on /
+  - Expression: {<YourHost>:vfs.fs.size[/,free].last()}<500000000
+  - Severity: Warning
+- To create alerts for unreachable hosts, first verify the host availability by navigating to `Configuration > Hosts` and ensuring the host's availability is enabled (look for green or gray dot next to Agent/ICMP)
+- Zabbix will automatically trigger and alert if the agent stops responding. If needed, the detection interval can be adjusted via `Administration > General > Housekeeping > Availability`
+
 
 
 ## Testing Monitoring and Visualisation
-- Use built-in Zabbix Graphs in Monitoring > Hosts > [Your Host] > Graphs
-- Create dashboards in Monitoring > Dashboard > Create
+- To view graphs in the Zabbix web UI, go to `Monitoring > Hosts > [Your Host] > Graphs`
+- Create dashboards in `Monitoring > Dashboard > Create`
 - To stress test a monitored client VM, run the following command in antiX-core Linux VM
   ```
   sudo apt install stress
   stress --cpu 2 --timeout 60
   ```
-- A CPU usage spike should be visible in the Zabbix dashboard
+  A temporary CPU spike should be visible in the Zabbix dashboard
 
