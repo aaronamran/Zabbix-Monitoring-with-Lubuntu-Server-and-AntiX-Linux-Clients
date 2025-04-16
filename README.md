@@ -48,7 +48,7 @@ For this homelab project, sysVinit which is the default option is used. The spec
   sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
   sudo apt update
   ```
-  Ubuntu 24.04 uses `libldap-2.6-0`, but Zabbix 6.0 depends on `2.5`. So the `.deb` file from Jammy (22.04) is grabbed and installed side-by-side
+  Ubuntu 24.04 uses `libldap-2.6-0`, but Zabbix 6.0 depends on `2.5`. So the `.deb` file from Jammy (22.04) is grabbed and installed side-by-side. The download link can be obtained from [http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/](http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/)
   ```
   wget http://archive.ubuntu.com/ubuntu/pool/main/o/openldap/libldap-2.5-0_2.5.18+dfsg-0ubuntu0.22.04.3_amd64.deb
   sudo dpkg -i libldap-2.5-0_2.5.18+dfsg-0ubuntu0.22.04.3_amd64.deb
