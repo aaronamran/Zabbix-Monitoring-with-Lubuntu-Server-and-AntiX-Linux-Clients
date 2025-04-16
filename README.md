@@ -176,11 +176,19 @@ For this homelab project, sysVinit which is the default option is used. The spec
   ```
   Server=<IP of Lubuntu VM>
   ```
+  ![image](https://github.com/user-attachments/assets/24c444a8-62b7-4359-a99d-c6b7efc6ea59)
+
 - Start the Agent service
   ```
-  sudo systemctl restart zabbix-agent
-  sudo systemctl enable zabbix-agent
+  sudo service restart zabbix-agent
+  sudo service enable zabbix-agent
   ```
+  To check if the service is running, use
+  ```
+  sudo /etc/init.d/zabbix-agent status
+  ```
+  ![image](https://github.com/user-attachments/assets/76bff0b1-573a-4fd8-9a94-33190f7da16e)
+
 - Before setting up triggers and dashboards, test whether the Zabbix Server can successfully communicate with the client. From the Zabbix Server, run
   ```
   zabbix_get -s <Client_IP> -k system.uptime
