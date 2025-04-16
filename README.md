@@ -212,9 +212,9 @@ For this homelab project, sysVinit which is the default option is used. The spec
   ![image](https://github.com/user-attachments/assets/2260c57c-9c33-4a12-a7c0-fcecf054126d)
 
   We should get a number that represents the system uptime in seconds. If a response is not received, check your network connectivity, firewall settings, and the `zabbix_agentd.conf` settings. In the screenshot, it shows that there was access restriction in Zabbix agent configuration. This is due to ServerActive in `zabbix_agentd.conf` not being set solely to be the Lubuntu Server VM's IP address. At this point of the homelab project, the original antiX-core Linux VM should already be cloned. If any processes are running on it, the machine's state can be saved first, then exited and cloned.
-- When both client VMs are powered on, check their IP address. If both VMs have the same IP address, it is due to them having the same MAC address, which causes the DHCP server to assign an identical IP. The solution for this in VirtualBox is to navigate to the Network settings of the cloned VM, and regenerate a new MAC address
+- When both client VMs are powered on, check their IP address. If both VMs have the same IP address, it is due to them having the same MAC address, which causes the DHCP server to assign an identical IP. The solution for this in VirtualBox is to navigate to the Network settings of the cloned VM, and regenerate a new MAC address.
   ![image](https://github.com/user-attachments/assets/674e5a11-bdc5-471d-a447-ff537d69b44d)
-
+- For the cloned client VM, make sure that it has Zabbix agent installed. If it is not installed, repeat the previous steps for the original VM to ensure both VMs are on the same level of progress before proceeding to be added as hosts in Lubuntu Server VM
 - Go to `Configuration > Hosts > Create Host` and set the following:
   - Hostname: Match /etc/hostname of client VM
   - IP: Client VM’s IP address
